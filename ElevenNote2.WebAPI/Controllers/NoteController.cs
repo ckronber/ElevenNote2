@@ -59,7 +59,17 @@ namespace ElevenNote2.WebAPI.Controllers
             if (!service.UpdateNote(noteEdit))
                 return InternalServerError();
 
-            return Ok();
+            return Ok($"Note ID#{noteEdit.NoteId} was updated");
+        }
+
+        public IHttpActionResult DeleteNote(int id)
+        {
+            var service = CreateNoteService();
+
+            if (!service.DeleteNote(id))
+                return InternalServerError();
+
+            return Ok($"Note Id #{id} was deleted.");
         }
     }
 }
