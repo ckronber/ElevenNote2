@@ -48,5 +48,18 @@ namespace ElevenNote2.WebAPI.Controllers
             var note = noteService.GetNoteById(id);
             return Ok(note);
         }
+
+        public IHttpActionResult Put(NoteEdit noteEdit)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var service = CreateNoteService();
+
+            if (!service.UpdateNote(noteEdit))
+                return InternalServerError();
+
+            return Ok();
+        }
     }
 }
